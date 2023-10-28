@@ -12,3 +12,13 @@ export const getMovieById = async movieId => {
   const response = await axios.get(`movie/${movieId}?api_key=${KEY}`);
   return response.data;
 };
+
+export const getCastId = async movieId => {
+  const response = await axios.get(`movie/${movieId}/credits?api_key=${KEY}`);
+  return response.data;
+};
+
+export const getReviewId = async movieId => {
+  const response = await axios.get(`movie/${movieId}/reviews?api_key=${KEY}`);
+  return response.data;
+};

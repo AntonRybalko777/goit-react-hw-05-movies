@@ -3,6 +3,7 @@ import { getMovieByQuery } from 'api';
 import { useEffect, useState } from 'react';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 import { RotatingLines } from 'react-loader-spinner';
+import { SearchBar } from 'components/SearchBar/SearchBar';
 
 export default function Movies() {
   const [params, setParams] = useSearchParams();
@@ -33,16 +34,7 @@ export default function Movies() {
 
   return (
     <header>
-      <form
-        onSubmit={evt => {
-          evt.preventDefault();
-          onSearch(evt.target.elements.search.value);
-          evt.target.reset();
-        }}
-      >
-        <input type="text" name="search" />
-        <button type="submit">Search</button>
-      </form>
+      <SearchBar onSubmit={onSearch} />
       {query && <MoviesList movies={movies} />}
       {movies.length === 0 && <p>No movies found.</p>}
       {loading && (

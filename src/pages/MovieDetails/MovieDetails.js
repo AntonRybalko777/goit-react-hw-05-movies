@@ -1,8 +1,21 @@
 import { useEffect, useState } from 'react';
-import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { getMovieById } from 'api';
 import { RotatingLines } from 'react-loader-spinner';
 import { MdKeyboardReturn } from 'react-icons/md';
+import {
+  StyledLink,
+  Span,
+  MovieWrapper,
+  InfoWrapper,
+  Votes,
+  GenreList,
+  Genre,
+  AddInfoHeader,
+  StyledNavLink,
+  AddInfoList,
+  AddInfoItem,
+} from './MovieDetails.styled';
 
 export default function MovieDetails() {
   const params = useParams();
@@ -32,10 +45,9 @@ export default function MovieDetails() {
 
   return (
     <div>
-      <Link to={location.state?.from ?? '/'}>
-        <MdKeyboardReturn />
-        Go back
-      </Link>
+      <StyledLink to={location.state?.from ?? '/'}>
+        <MdKeyboardReturn /> <Span>Go back</Span>
+      </StyledLink>
       {loading && (
         <RotatingLines
           strokeColor="grey"
@@ -48,38 +60,45 @@ export default function MovieDetails() {
       {error && <p>Whoops! Looks like we couldn't find this movie.</p>}
       {movie.id && (
         <>
-          <img
-            src={
-              movie.poster_path
-                ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-                : defaultImg
-            }
-            alt="poster"
-            width={250}
-          />
-          <h2>
-            {movie.title && movie.original_title} (
-            {movie.release_date.split('-')[0]})
-          </h2>
-          <p>User Score: {movie.vote_average.toFixed(1) * 10} %</p>
-          <h3>Overview</h3>
-          {movie.overview}
-          <h3>Genres</h3>
-          <ul>
-            {movie.genres.map(genre => (
-              <li key={genre.id}>{genre.name}</li>
-            ))}
-          </ul>
+          <MovieWrapper>
+            <img
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                  : defaultImg
+              }
+              alt="poster"
+              width={250}
+            />
+            <InfoWrapper>
+              <h2>
+                {movie.title && movie.original_title} (
+                {movie.release_date.split('-')[0]})
+              </h2>
+              <p>
+                User Score: <b> {movie.vote_average.toFixed(1) * 10} %</b>{' '}
+                <Votes> ({movie.vote_count} votes)</Votes>
+              </p>
+              <h3>Overview</h3>
+              <p>{movie.overview}</p>
+              <h3>Genres</h3>
+              <GenreList>
+                {movie.genres.map(genre => (
+                  <Genre key={genre.id}>{genre.name}</Genre>
+                ))}
+              </GenreList>
+            </InfoWrapper>
+          </MovieWrapper>
 
-          <p>Additional information</p>
-          <ul>
-            <li>
-              <Link to="cast">Cast</Link>
-            </li>
-            <li>
-              <Link to="reviews">Reviews</Link>
-            </li>
-          </ul>
+          <AddInfoHeader>Additional information</AddInfoHeader>
+          <AddInfoList>
+            <AddInfoItem>
+              <StyledNavLink to="cast">Cast</StyledNavLink>
+            </AddInfoItem>
+            <AddInfoItem>
+              <StyledNavLink to="reviews">Reviews</StyledNavLink>
+            </AddInfoItem>
+          </AddInfoList>
         </>
       )}
 

@@ -15,16 +15,11 @@ export const Main = styled.main`
 `;
 
 export const StyledLink = styled(NavLink)`
-  text-decoration: none;
   transition: 200ms ease-in;
   padding: 5px;
 
   &.active {
     color: tomato;
-  }
-
-  &:hover,
-  &:focus {
   }
 `;
 

@@ -1,6 +1,12 @@
 import { getReviewId } from 'api';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import {
+  ReviewItem,
+  ReviewContent,
+  AuthorName,
+  Author,
+} from './Reviews.styled';
 
 export const Reviews = () => {
   const [reviewList, setReviewList] = useState([]);
@@ -27,12 +33,12 @@ export const Reviews = () => {
       {reviewList.length > 0 ? (
         <ul>
           {reviewList.map(review => (
-            <li key={review.id}>
-              <p>
-                Author: <b>{review.author}</b>
-              </p>
-              <p>{review.content}</p>
-            </li>
+            <ReviewItem key={review.id}>
+              <Author>
+                Author: <AuthorName>{review.author}</AuthorName>
+              </Author>
+              <ReviewContent>{review.content}</ReviewContent>
+            </ReviewItem>
           ))}
         </ul>
       ) : (

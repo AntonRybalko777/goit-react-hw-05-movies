@@ -1,6 +1,7 @@
 import { getCastId } from 'api';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { List, Li } from './Cast.styled';
 
 export const Cast = () => {
   const [castList, setCastList] = useState([]);
@@ -25,9 +26,9 @@ export const Cast = () => {
 
   return (
     <div>
-      <ul>
+      <List>
         {castList.map(actor => (
-          <li key={actor.id}>
+          <Li key={actor.id}>
             <img
               src={
                 actor.profile_path
@@ -38,10 +39,10 @@ export const Cast = () => {
               width={150}
             />
             <h3>{actor.name}</h3>
-            <p>Character: {actor.character}</p>
-          </li>
+            <p>{actor.character}</p>
+          </Li>
         ))}
-      </ul>
+      </List>
       {error && <p>Whoops! Something went wrong. Please reload the page.</p>}
     </div>
   );

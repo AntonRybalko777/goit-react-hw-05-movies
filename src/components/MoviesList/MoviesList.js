@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import { List, Li, Title, Year, Img } from './MoviesList.styled';
 const defaultImg =
   'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
 export const MoviesList = ({ movies }) => {
@@ -6,24 +7,25 @@ export const MoviesList = ({ movies }) => {
 
   return (
     <div>
-      <ul>
-        {movies.map(({ id, title, name, poster_path }) => (
-          <li key={id}>
+      <List>
+        {movies.map(({ id, title, name, poster_path, release_date }) => (
+          <Li key={id}>
             <Link to={`/movies/${id}`} state={{ from: location }}>
-              <img
+              <Img
                 src={
                   poster_path
                     ? `https://image.tmdb.org/t/p/w500/${poster_path}`
                     : defaultImg
                 }
                 alt="poster"
-                width={150}
+                width={200}
               />
-              {title ?? name}
+              <Title>{title ?? name}</Title>
+              <Year>{release_date && release_date.split('-')[0]}</Year>
             </Link>
-          </li>
+          </Li>
         ))}
-      </ul>
+      </List>
     </div>
   );
 };

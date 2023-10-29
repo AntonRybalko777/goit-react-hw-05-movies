@@ -1,13 +1,21 @@
+import { BsSearch } from 'react-icons/bs';
+import { Form, Button, Input } from './SearchBar.styled';
+
 export const SearchBar = ({ onSubmit }) => {
   return (
-    <form
+    <Form
       onSubmit={evt => {
         evt.preventDefault();
         onSubmit(evt.target.elements.search.value);
+        evt.target.reset();
       }}
     >
-      <input type="text" name="search" />
-      <button type="submit">Search</button>
-    </form>
+      <Button type="submit">
+        <span>
+          <BsSearch />
+        </span>
+      </Button>
+      <Input type="text" name="search" placeholder="Search movie" />
+    </Form>
   );
 };

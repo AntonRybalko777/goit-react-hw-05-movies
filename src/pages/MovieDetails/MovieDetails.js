@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { getMovieById } from 'api';
 import { RotatingLines } from 'react-loader-spinner';
+import { MdKeyboardReturn } from 'react-icons/md';
 
 export default function MovieDetails() {
   const params = useParams();
@@ -31,7 +32,10 @@ export default function MovieDetails() {
 
   return (
     <div>
-      <Link to={location.state?.from ?? '/'}>Go back</Link>
+      <Link to={location.state?.from ?? '/'}>
+        <MdKeyboardReturn />
+        Go back
+      </Link>
       {loading && (
         <RotatingLines
           strokeColor="grey"

@@ -2,6 +2,7 @@ import { getTrending } from 'api';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 import { useEffect, useState } from 'react';
 import { RotatingLines } from 'react-loader-spinner';
+import { Header } from './Home.styled';
 
 export default function Home() {
   const [movies, setMovies] = useState([]);
@@ -26,7 +27,7 @@ export default function Home() {
 
   return (
     <div>
-      <h2>Trending today</h2>
+      <Header>Trending today</Header>
       <MoviesList movies={movies} />
       {loading && (
         <RotatingLines

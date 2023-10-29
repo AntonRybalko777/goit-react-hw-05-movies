@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+import { Suspense } from 'react';
 
 const Link = styled(NavLink)`
   margin-right: 5px;
@@ -18,7 +19,9 @@ export const Layout = () => {
           <Link to="/movies">Movies</Link>
         </nav>
       </header>
-      <Outlet />
+      <Suspense fallback={'Loading...'}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };

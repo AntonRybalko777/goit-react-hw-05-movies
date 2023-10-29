@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { getMovieById } from 'api';
 import { RotatingLines } from 'react-loader-spinner';
 
@@ -11,6 +11,7 @@ export default function MovieDetails() {
   const [movie, setMovie] = useState({});
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     async function getMovieDetails() {
@@ -30,6 +31,7 @@ export default function MovieDetails() {
 
   return (
     <div>
+      <Link to={location.state?.from ?? '/'}>Go back</Link>
       {loading && (
         <RotatingLines
           strokeColor="grey"

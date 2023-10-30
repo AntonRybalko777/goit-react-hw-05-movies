@@ -45,7 +45,7 @@ export default function MovieDetails() {
 
   return (
     <div>
-      <StyledLink to={location.state?.from ?? '/'}>
+      <StyledLink to={location?.state?.from ?? '/'}>
         <MdKeyboardReturn /> <Span>Go back</Span>
       </StyledLink>
       {loading && (
@@ -93,10 +93,20 @@ export default function MovieDetails() {
           <AddInfoHeader>Additional information</AddInfoHeader>
           <AddInfoList>
             <AddInfoItem>
-              <StyledNavLink to="cast">Cast</StyledNavLink>
+              <StyledNavLink
+                to="cast"
+                state={{ from: location?.state?.from ?? '/' }}
+              >
+                Cast
+              </StyledNavLink>
             </AddInfoItem>
             <AddInfoItem>
-              <StyledNavLink to="reviews">Reviews</StyledNavLink>
+              <StyledNavLink
+                to="reviews"
+                state={{ from: location?.state?.from ?? '/' }}
+              >
+                Reviews
+              </StyledNavLink>
             </AddInfoItem>
           </AddInfoList>
         </>
